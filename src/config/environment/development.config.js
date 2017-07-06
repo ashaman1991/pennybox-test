@@ -1,7 +1,7 @@
 // Development specific configuration
 const developmentConfig = {
   mongo: {
-    uri: 'mongodb://localhost/pennybox-nodejs-test-task-development',
+    uri: 'mongodb://192.168.99.100:27017/pennybox-nodejs-test-task-development',
     debug: true
   }
 };
