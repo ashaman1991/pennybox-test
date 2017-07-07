@@ -18,7 +18,9 @@ class UserController {
       const userId = req.query.id;
       const targetUserId = req.params.id;
       if (userId !== targetUserId) {
-        throw new Error('Must be the same user');
+        const error = new Error('Must be the same user');
+        error.code = 403; // Forbidden
+        throw error;
       }
       const tasks = await TaskModel.find({ userId });
       let taskIds = tasks.map(task => task._id);
@@ -27,7 +29,7 @@ class UserController {
       await UserModel.remove({ _id: userId });
       res.send({ message: `User ${userId} removed` });
     } catch (error) {
-      res.send(400, error.message);
+      res.send(error.code || 500, error.message);
     }
   }
 
